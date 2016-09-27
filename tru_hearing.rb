@@ -27,33 +27,28 @@ class TruHearing
       # binding.pry
       timeslots.map do |times|
         # binding.pry
-        # Adding AM/PM here `times + "pm" if times <= 5:00`
+        # TODO: Adding AM/PM here `times + "pm" if times <= 5:00`
 
-        
-
-        closing = Time.parse('5:00')
-        if Time.parse(times) <= closing
-          times + "pm"
-          
-        end
-
-
+        # FIXME: This block adds pm to the correct times, but returns nil for rest
+        # closing = Time.parse('5:00')
+        # if Time.parse(times) <= closing
+        #   Time.parse(times + "pm")
+        # end
       end
     end
   end
 
   def team_availability(appt_array, hours)
-    # normalize_times(appt_array)
 
-    # Compare elements of two arrays 
-    # `array1.zip(array2).map { |x, y| if x == y } => [True, False, True]`
-    #
-    # Return new array with out duplicate times 
-    # available_times = array1 - array2
-    # Doesnt like 2d arrays
+    # Compare elements of two arrays and if duplicate remove from first array
+    # hours.zip(appt_array).map { |x, y| (x == y) ? hours - appt_array : y}
+    # Returns hours of opperation minus the blocks of time that have appts
+    # FIXME: Issue not correctly returning condensed blocks of time
+
   end
 
-  def condensed_times()
+  def condensed_times(condense_arry)
+
   end
   
   x = TruHearing.new
