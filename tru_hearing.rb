@@ -2,7 +2,13 @@ require 'pry'
 require 'time'
 
 class TruHearing
-  
+
+  arg_array = [['9:00', '9:30'],
+                ['9:00', '11:30'],
+                ['10:00', '11:00'],
+                ['2:30', '3:00'],
+                ['2:30', '3:30']]
+
   hours = [['8:30', '9:00'],
            ['9:00', '9:30'],
            ['9:30', '10:00'],
@@ -17,27 +23,17 @@ class TruHearing
            ['4:00','4:30'],
            ['4:30','5:00']]
 
-  arg_array = [['9:00', '9:30'],
-                ['9:00', '11:30'],
-                ['10:00', '11:00'],
-                ['2:30', '3:00'],
-                ['2:30', '3:30']]
-
   def normalize_times(array)
-    array[0..array.length].map do |timeslots|
+    array[0..array.size].map do |timeslots|
       # binding.pry
-      timeslots.map do |times|
+      timeslots.map do |time|
         # binding.pry
-        # TODO: Adding AM/PM here `times + "pm" if times <= 5:00`
-
-        # FIXME: This block adds pm to the correct times, but returns nil for rest
         closing = Time.parse('5:00')
-        if Time.parse(times) > closing
-           timeslots << times
-        elsif Time.parse(times) <= closing
-          Time.parse(times + "pm")
+        # binding.pry 
+        if Time.parse(time) <= closing
+          Time.parse(time + "pm")
         else
-          next
+          Time.parse(time)
         end
       end
     end
